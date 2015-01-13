@@ -16,9 +16,20 @@ sub new {
 
 sub target_build {
     my $this = shift;
-
     $this->SUPER::target_build();
-    # Do other build stuff here
+
+    local $| = 1;
+    print "Fetching dependencies:\n";
+    print $this->sys_action( qw(npm install) ) . "\n";
+    print "Done!\n";
+
+    print "Updating components:\n";
+    print $this->sys_action( qw(bower update) ) . "\n";
+    print "Done!\n";
+
+    print "Building...\n";
+    print $this->sys_action( qw(grunt build) ) . "\n";
+    print "Done!\n";
 }
 
 package main;

@@ -1,7 +1,14 @@
 !noci
 data/System/CodeMirrorPlugin.txt 0644
 lib/Foswiki/Plugins/CodeMirrorPlugin.pm 0644
+lib/Foswiki/Plugins/CodeMirrorPlugin/Config.spec 0644
 lib/Foswiki/Plugins/CodeMirrorPlugin/DEPENDENCIES 0644
+pub/System/CodeMirrorPlugin/scripts/codemirror.min.js 0644
+pub/System/CodeMirrorPlugin/scripts/modac.codemirror.js 0644
+pub/System/CodeMirrorPlugin/scripts/modac.codemirror.min.js 0644
+pub/System/CodeMirrorPlugin/styles/modac.codemirror.css 0644
+pub/System/CodeMirrorPlugin/styles/modac.codemirror.min.css 0644
+pub/System/CodeMirrorPlugin/bower/codemirror-emmet/dist/emmet.js 0644
 pub/System/CodeMirrorPlugin/bower/codemirror/addon/comment/comment.js 0644
 pub/System/CodeMirrorPlugin/bower/codemirror/addon/comment/continuecomment.js 0644
 pub/System/CodeMirrorPlugin/bower/codemirror/addon/dialog/dialog.css 0644

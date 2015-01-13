@@ -19,6 +19,7 @@
     "tests"
   ],
   "dependencies": {
-    "codemirror": "~4.10.0"
+    "codemirror": "~4.10.0",
+    "codemirror-emmet": "~1.1.0"
   }
 }
