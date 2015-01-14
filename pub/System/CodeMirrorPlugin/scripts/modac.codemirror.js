@@ -195,15 +195,15 @@
     var cm = CodeMirror.fromTextArea( $topic[0], opts );
     cm.addOverlay( whitespaceOverlay );
 
-    var autoFormat = function( editor ) {
-      var totalLines = editor.lineCount();
-      var totalChars = editor.getValue().length;
-      editor.autoFormatRange(
-        {line: 0, ch: 0}, 
-        {line: totalLines - 1, ch: editor.getLine(totalLines - 1).length}
-      );
-    };
+    // var autoFormat = function( editor ) {
+    //   var totalLines = editor.lineCount();
+    //   var totalChars = editor.getValue().length;
+    //   editor.autoFormatRange(
+    //     {line: 0, ch: 0}, 
+    //     {line: totalLines - 1, ch: editor.getLine(totalLines - 1).length}
+    //   );
+    // };
 
-    autoFormat( cm );
+    // autoFormat( cm );
   });
 })(jQuery);
