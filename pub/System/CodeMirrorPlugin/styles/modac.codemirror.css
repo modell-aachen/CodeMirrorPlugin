@@ -2,6 +2,7 @@
 .CodeMirror {
   font-family: 'monospace';
   font-size: 11px;
+  min-height: 300px;
   line-height: 125%; }
 
 /* PADDING */
@@ -490,9 +491,11 @@ li.CodeMirror-hint-active {
     font-style: italic;
     font-weight: bold; }
   .cm-s-modac span.cm-bullet-list {
-    color: #7EA656; }
+    color: #7EA656;
+    font-weight: bold; }
   .cm-s-modac span.cm-definition-list {
-    color: #6C8CD5; }
+    color: #6C8CD5;
+    font-weight: bold; }
   .cm-s-modac span.cm-hr {
     color: #f92672; }
   .cm-s-modac span.cm-italic {
@@ -510,7 +513,8 @@ li.CodeMirror-hint-active {
     background-color: #f3f2ff;
     color: #7653c1; }
   .cm-s-modac span.cm-numbered-list {
-    color: #3F7F7F; }
+    color: #3F7F7F;
+    font-weight: bold; }
   .cm-s-modac span.cm-table, .cm-s-modac span.cm-table-split {
     color: maroon; }
   .cm-s-modac span.cm-wiki-link {

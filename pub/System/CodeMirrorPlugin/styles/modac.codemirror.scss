@@ -3,7 +3,7 @@
 .CodeMirror {
   font-family: 'monospace';
   font-size: 11px;
-  // height: 300px;
+  min-height: 300px;
   line-height: 125%;
 }
 
@@ -458,10 +458,12 @@ li.CodeMirror-hint-active {
 
     &.cm-bullet-list {
       color: #7EA656;
+      font-weight: bold;
     }
 
     &.cm-definition-list {
       color: #6C8CD5;
+      font-weight: bold;
     }
 
     &.cm-fixed {
@@ -497,6 +499,7 @@ li.CodeMirror-hint-active {
 
     &.cm-numbered-list {
       color: #3F7F7F;
+      font-weight: bold;
     }
 
     &.cm-table, &.cm-table-split {

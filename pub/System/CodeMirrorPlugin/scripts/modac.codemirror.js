@@ -18,9 +18,9 @@
         {regex: /={2}[^\s].*[^\s]={2}/, token: "fixed"},
         {regex: /^---\+{1,6}(!!)?\s.*/, token: "heading"},
         {regex: /^---\+{6}\++(!!)?\s.*/, token: "invalid-heading"},
-        {regex: /^(\s{3})+\*\s.*/, token: "bullet-list"},
-        {regex: /^(\s{3})+[1aAiI]\.?\s.*/, token: "numbered-list"},
-        {regex: /^(\s{3})+\$\s.*/, token: "definition-list"},
+        {regex: /^(\s{3})+\*\s/, token: "bullet-list", next: "start"},
+        {regex: /^(\s{3})+[1aAiI]\.?\s/, token: "numbered-list", next: "start"},
+        {regex: /^(\s{3})+\$\s/, token: "definition-list", next: "start"},
         {regex: /%[A-Z]+%(\.[A-Z].*)+/, token: "link"},
         {regex: /\[\[.*\]\]/, token: "wiki-link"},
         {regex: /(?:%AQUA%)/, token: "color-aqua", next: "aqua"},
@@ -194,5 +194,16 @@
 
     var cm = CodeMirror.fromTextArea( $topic[0], opts );
     cm.addOverlay( whitespaceOverlay );
+
+    var autoFormat = function( editor ) {
+      var totalLines = editor.lineCount();
+      var totalChars = editor.getValue().length;
+      editor.autoFormatRange(
+        {line: 0, ch: 0}, 
+        {line: totalLines - 1, ch: editor.getLine(totalLines - 1).length}
+      );
+    };
+
+    autoFormat( cm );
   });
 })(jQuery);

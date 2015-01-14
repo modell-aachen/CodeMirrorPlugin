@@ -21,21 +21,19 @@ sub initPlugin {
       return 0;
   }
 
-  my $context = Foswiki::Func::getContext();
+  my $ctx = Foswiki::Func::getContext(); 
   return 1 unless $context->{edit};
+  return 1 unless $cfg->{'NOWYSIWYG'};
+  return 1 if $ctx->{'WYSIWYG_TEXT'};
 
   my $query = Foswiki::Func::getRequestObject();
   my $param = $query->{param};
-  return 1 unless $param;
-
-  my $nowysiwyg = $param->{nowysiwyg};
-  return 1 unless $nowysiwyg || @$nowysiwyg[0] ne 1;
-
-  my $nocm = $param->{nocm};
-  return 1 if $nocm && @$nocm[0] eq 1;
-
+  my $nocm = $param->{nocm} if $param;
   my $pref = Foswiki::Func::getPreferencesValue( "NOCM" );
-  return 1 if $pref;
+  if ( $pref || ($nocm && @$nocm[0] eq 1) ) {
+    $ctx->{'NOCM'} = 1;
+    return 1;
+  }
 
   my $debug = $Foswiki::cfg{Plugins}{CodeMirrorPlugin}{Debug} || 0;
   my $suffix = $debug ? '' : '.min';
