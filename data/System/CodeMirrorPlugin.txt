@@ -1,43 +1,76 @@
 %META:TOPICPARENT{name="Plugins"}%
----+ Empty Plugin
+<literal>
+  <style>
+    kbd {
+      -moz-border-radius:3px;
+      -moz-box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+      -webkit-border-radius:3px;
+      -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+      background-color:#f7f7f7;
+      border:1px solid #ccc;
+      border-radius:3px;
+      box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+      color:#333;
+      display:inline-block;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:11px;
+      line-height:1.4;
+      margin:0 .1em;
+      padding:.1em .6em;
+      text-shadow:0 1px 0 #fff;
+    }
+  </style>
+</literal>
+
+---+ CodeMirrorPlugin
 
 %SHORTDESCRIPTION%
-
-Learn how to create your own plugin in %SYSTEMWEB%.DevelopingPlugins.
-
----++ Plugin Preferences
-
-Plugin preferences should be set using =configure=, as described in
-%SYSTEMWEB%.DevelopingPlugins. You can also use
-[[%SYSTEMWEB%.PreferenceSettings][preference settings]] to define any
-user-controllable configuration. You are strongly advised
-to use the name of the plugin as a prefix, to avoid the risk of namespace
-clashes with other extensions that may try to use the same name.
-
-*BAD*
-   * Set EXAMPLE = Example setting
-   * Set FORMAT  = %d-%m-%y
-*Good*
-   * Set EMPTYPLUGIN_EXAMPLE = Example setting
-   * Set EMPTYPLUGIN_FORMAT  = %d-%m-%y
 
 <!--
 One line description, required for extensions repository catalog.
    * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
 -->
 
+---++ Requirements
+
+IE9+, Firefox, Chrome, Safari
+
+---++ Plugin Preferences
+
+CodeMirrorPlugin will load automatically unless disabled by preference value
+<verbatim>
+   * Set NOCM = 1
+</verbatim>
+or query parameter
+<verbatim>
+nocm=1
+</verbatim>
+
+
+---++ Editor Shortcuts
+| *Shortcut* | *Function* |
+| <kbd>CTRL</kbd> <strong>+</strong> <kbd>F</kbd> | Search |
+| <kbd>%MAKETEXT{"SHIFT"}%</kbd> <strong>+</strong> <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>F</kbd> | Clear search |
+| <kbd>F3</kbd> | Find next |
+| <kbd>%MAKETEXT{"SHIFT"}%</kbd> <strong>+</strong> <kbd>F3</kbd>| Find previous |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>G</kbd> | Go to line |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>H</kbd> | Replace |
+| <kbd>%MAKETEXT{"SHIFT"}%</kbd> <strong>+</strong> <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>H</kbd> | Replace all |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>%MAKETEXT{"Space"}%</kbd>| Autocomplete |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>P</kbd> | Prettify selection |
+| <kbd>F11</kbd> | Toggle fullscreen |
+| <kbd>ESC</kbd> | Exit fullscreen |
+
 ---++ Installation
 %$INSTALL_INSTRUCTIONS%
 
----++ Plugin Info
+---++ Info
 
-|  Author: | Foswiki:Main.PluginAuthor |
-|  Copyright: | &copy; 2012, Foswiki Contributors |
-|  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Release: | %$RELEASE% |
+|  Author: | SvenMeyer |
+|  Copyright: | 2015, Modell Aachen GmbH, All Rights Reserved |
+|  License: | MIT ([[http://opensource.org/licenses/MIT][MIT License]]) |
+|  Dependencies: | %$DEPENDENCIES% |
 |  Version: | %$VERSION% |
-|  Change&nbsp;History: | <!-- versions below in reverse order -->&nbsp; |
-|  XX Mmm 20XX (1.0) | Description of change |
-|  Home: | http://foswiki.org/Extensions/%TOPIC% |
-|  Support: | http://foswiki.org/Support/%TOPIC% |
+|  Release: | %$RELEASE% |
+|  Change&nbsp;History: | <!-- versions below in reverse order --> |
 

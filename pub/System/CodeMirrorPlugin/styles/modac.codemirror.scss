@@ -1,11 +1,80 @@
+@font-face {
+  font-family: 'SourceCodePro';
+  src: url('../fonts/sourcecodepro-regular-webfont.eot');
+  src: url('../fonts/sourcecodepro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sourcecodepro-regular-webfont.woff2') format('woff2'),
+       url('../fonts/sourcecodepro-regular-webfont.woff') format('woff'),
+       url('../fonts/sourcecodepro-regular-webfont.ttf') format('truetype'),
+       url('../fonts/sourcecodepro-regular-webfont.svg#source_code_proregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* BASICS */
 
 .CodeMirror {
-  font-family: 'monospace';
+  font-family: 'SourceCodePro';
+  height: 300px;
+  line-height: 1.5;
   font-size: 11px;
-  min-height: 300px;
-  line-height: 125%;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  color: black;
 }
+
+.CodeMirror-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  z-index: 10000;
+}
+
+.CodeMirror-search-match {
+  background: gold;
+  border-top: 1px solid orange;
+  border-bottom: 1px solid orange;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  opacity: .5;
+}
+
+.CodeMirror-dialog {
+  position: absolute;
+  left: 0; right: 0;
+  background: white;
+  z-index: 15;
+  padding: .1em .8em;
+  overflow: hidden;
+  color: #333;
+}
+
+.CodeMirror-dialog-top {
+  border-bottom: 1px solid #eee;
+  top: 0;
+}
+
+.CodeMirror-dialog-bottom {
+  border-top: 1px solid #eee;
+  bottom: 0;
+}
+
+.CodeMirror-dialog input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 20em;
+  color: inherit;
+  font-family: monospace;
+}
+
+.CodeMirror-dialog button {
+  font-size: 70%;
+}
+
 
 /* PADDING */
 
@@ -138,14 +207,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 
 /* The rest of this file contains styles related to the mechanics of
    the editor. You probably shouldn't touch them. */
-
-.CodeMirror {
-  line-height: 1;
-  position: relative;
-  overflow: hidden;
-  background: white;
-  color: black;
-}
 
 .CodeMirror-scroll {
   overflow: scroll !important; /* Things will break if this is overridden */
@@ -282,7 +343,7 @@ div.CodeMirror-cursors {
 }
 
 .CodeMirror-selected { background: #d9d9d9; }
-.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }
+.CodeMirror-focused .CodeMirror-selected { background: #f1f1f1; }
 .CodeMirror-crosshair { cursor: crosshair; }
 
 .cm-searching {
@@ -328,7 +389,10 @@ span.CodeMirror-selectedtext { background: none; }
 
   background: white;
   font-size: 90%;
-  font-family: monospace;
+  // font-family: monospace;
+  
+  font-family: 'SourceCodePro';
+  // font-size: 9px;
 
   max-height: 20em;
   overflow-y: auto;
@@ -350,6 +414,15 @@ li.CodeMirror-hint-active {
   color: white;
 }
 
+
+/* TOOLBAR */
+.CodeMirror-toolbar {
+  height: 30px;
+  background-color: #f7f7f7;
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+}
 
 /* SKIN */
 .cm-s-modac {
@@ -503,8 +576,11 @@ li.CodeMirror-hint-active {
     }
 
     &.cm-table, &.cm-table-split {
-      // background: #f3f3f3;
       color: maroon;
+      font-weight: bold;
+    }
+    &.cm-table2, &.cm-table-split2 {
+      color: lime;
     }
 
     &.cm-wiki-link {
@@ -523,7 +599,7 @@ li.CodeMirror-hint-active {
       background: lighten(#862f2f, 20%);
     }
 
-    &.cm-set-other {
+    &.cm-set-param {
       background-color: #f3f2ff;
       color: #7653c1;
     }
@@ -540,9 +616,12 @@ li.CodeMirror-hint-active {
 
     &.cm-whitespace {
       color: #c4c4c4;
-      &:before {
-        font-family: "monospace";
-        content: "‧";
+      &:after {
+        font-family: 'SourceCodePro';
+        font-size: 8px;
+        content: "•";
+        margin-left: -4px;
+        margin-right: 3px;
       }
     }
 
@@ -564,6 +643,52 @@ li.CodeMirror-hint-active {
     &.cm-color-teal {color: teal;}
     &.cm-color-white {color: white;}
     &.cm-color-yellow {color: yellow;}
+  }
+}
+
+.cm-btn {
+  &.btn-base {
+    display: inline-block;
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer;
+    margin: 0px 3px;
+    padding: 7px;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &:first-child {
+      margin-left: 30px;
+    }
+
+    &:hover {
+      background-color: darken(#f7f7f7, 10%);
+    }
+
+    &:active {
+      background-color: darken(#f7f7f7, 20%);
+    }
+
+    &.btn-undo {
+      background-image: url(../assets/undo.png);
+    }
+
+    &.btn-redo {
+      background-image: url(../assets/redo.png);
+    }
+
+    &.btn-find {
+      background-image: url(../assets/find.png);
+    }
+
+    &.btn-replace {
+      background-image: url(../assets/replace.png);
+    }
+
+    &.btn-help {
+      background-image: url(../assets/help.png);
+      float: right;
+    }
   }
 }
 

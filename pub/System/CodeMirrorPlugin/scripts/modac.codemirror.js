@@ -6,12 +6,11 @@
     }
 
     var states = {
-      // The start state contains the rules that are intially used
       start: [
         {regex: /%\{/, token: "comment", next: "comment"},
         {regex: /^(?:\s{3}\*\s(Set|Local)\s)/, token: "set", next: "set"},
         {regex: /(Set|Local).+/, token: "set-invalid"},
-        {regex: /\*[^\s].*[^\s]\*/, token: "bold"},
+        {regex: /\*(?!\s)[^\*]+[^\s]\*/, token: "bold"},
         {regex: /_{2}[^\s].*[^\s]_{2}/, token: "bold-italic"},
         {regex: /={2}[^\s].*[^\s]={2}/, token: "bold-fixed"},
         {regex: /_[^\s].*[^\s]_/, token: "italic"},
@@ -23,6 +22,7 @@
         {regex: /^(\s{3})+\$\s/, token: "definition-list", next: "start"},
         {regex: /%[A-Z]+%(\.[A-Z].*)+/, token: "link"},
         {regex: /\[\[.*\]\]/, token: "wiki-link"},
+
         {regex: /(?:%AQUA%)/, token: "color-aqua", next: "aqua"},
         {regex: /(?:%BLACK%)/, token: "color-black", next: "black"},
         {regex: /(?:%BLUE%)/, token: "color-blue", next: "blue"},
@@ -41,20 +41,23 @@
         {regex: /(?:%TEAL%)/, token: "color-teal", next: "teal"},
         {regex: /(?:%WHITE%)/, token: "color-white", next: "white"},
         {regex: /(?:%YELLOW%)/, token: "color-yellow", next: "yellow"},
+
         {regex: /(?:%TMPL:)/, token: "tmpl", next: "tmpl"},
         {regex: /^#.*/, token: "anchor"},
         {regex: /%[A-Z]+/, token: "macro", next: "macro"},
         {regex: /^---/, token: "hr"},
-        {regex: /\|.+\|/, token: "table"},
-        {regex: /\|.+\\/, token: "table-split"},
+        {regex: /\|(?=[^\|\\]*[\|\\])/, token: "table", push: "table"},
+        {regex: /(?=[^\|]*)\||\\/, token: "table"},
         {regex: /"(?:[^\\]|\\.)*?"/, token: "string"},
-        {regex: /0x[a-f\d]+|[-+]?(?:\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?/i,
-         token: "number"},
-        {regex: /[a-z$][\w$]*/, token: "variable"},
-        {regex: /</, token: "tag", mode: {spec: "html", end: />/}}
+        {regex: /0x[a-f\d]+|[-+]?(?:\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?/i, token: "number"},
+        {regex: /[a-z$][\w$]*/, token: "variable"}
+      ],
+      table: [
+        {regex: /\||\\/, pop: true, token: "table2", next: "start"},
+        {next: "start"}
       ],
       set: [
-        {regex: /[^\s=]+/, token: "set-other"},
+        {regex: /[^\s=]+/, token: "set-param"},
         {regex: /=/, token: "set-assign", next: "start"},
       ],
       tmpl: [
@@ -188,22 +191,74 @@
       rulers: [80,120],
       vimMode: false,
       flattenSpans : false,
-      extraKeys: {"Ctrl-Space": "autocomplete"},
+      fullScreen: false,
+      extraKeys: {
+        "Ctrl-Space": "autocomplete",
+        "Ctrl-F": "find",
+        "Shift-Ctrl-F": "clearSearch",
+        "Shift-F3": "findPrev",
+        "F3": "findNext",
+        "Ctrl-G": "gotoLine",
+        "Ctrl-H": "replace",
+        "Shift-Ctrl-H": "replaceAll",
+        "Ctrl-P": function( editor ) {
+          editor.prettyPrint();
+        },
+        "F11": function( editor ) {
+          editor.setOption( "fullScreen" , !editor.getOption("fullScreen") );
+        },
+        "Esc": function( editor ) {
+          if ( editor.getOption( "fullScreen" ) ) {
+            editor.setOption( "fullScreen", false );
+          }
+        }
+      },
       highlightSelectionMatches: {showToken: /\w/}
     };
 
-    var cm = CodeMirror.fromTextArea( $topic[0], opts );
+    CodeMirror.currentInstance = CodeMirror.fromTextArea( $topic[0], opts );
+    var cm = CodeMirror.currentInstance;
     cm.addOverlay( whitespaceOverlay );
 
-    // var autoFormat = function( editor ) {
-    //   var totalLines = editor.lineCount();
-    //   var totalChars = editor.getValue().length;
-    //   editor.autoFormatRange(
-    //     {line: 0, ch: 0}, 
-    //     {line: totalLines - 1, ch: editor.getLine(totalLines - 1).length}
-    //   );
-    // };
+    var panel = document.createElement("div");
+    panel.className = "CodeMirror-toolbar top";
 
-    // autoFormat( cm );
+    var names = ['undo', 'redo', 'find', 'replace', 'help'];
+    var funcs = {
+      undo: function() { CodeMirror.currentInstance.execCommand('undo');},
+      redo: function() { CodeMirror.currentInstance.execCommand('redo'); },
+      find: function() { CodeMirror.currentInstance.execCommand('find'); },
+      replace: function() { CodeMirror.currentInstance.execCommand('replace'); },
+      help: function() {
+        var p = foswiki.preferences;
+        var url = [
+          p.SCRIPTURL,
+          '/view',
+          p.SCRIPTSUFFIX,
+          '/',
+          p.SYSTEMWEB,
+          '/CodeMirrorPlugin#Editor_Shortcuts'
+        ];
+
+        window.open( url.join(''), '_blank' );
+      }
+    };
+
+    var clickHandler = function() {
+      var func = this.getAttribute('data-func');
+      funcs[func].call();
+      return false;
+    };
+
+    for( var i in names ) {
+      var name = names[i];
+      var button = panel.appendChild( document.createElement('a') );
+      button.className = 'cm-btn btn-base btn-' + name;
+      button.setAttribute( 'data-func', name );
+      button.setAttribute( 'title', name );
+      CodeMirror.on( button, 'click', clickHandler );
+    }
+
+    cm.addPanel( panel, {position: 'top'} );
   });
 })(jQuery);

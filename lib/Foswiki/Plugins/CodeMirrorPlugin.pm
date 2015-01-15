@@ -22,8 +22,8 @@ sub initPlugin {
   }
 
   my $ctx = Foswiki::Func::getContext(); 
-  return 1 unless $context->{edit};
-  return 1 unless $cfg->{'NOWYSIWYG'};
+  return 1 unless $ctx->{edit};
+  return 1 unless $ctx->{'NOWYSIWYG'};
   return 1 if $ctx->{'WYSIWYG_TEXT'};
 
   my $query = Foswiki::Func::getRequestObject();
@@ -61,11 +61,20 @@ STYLE
 <script type="text/javascript" src="$plugin/bower/codemirror/addon/edit/closetag.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/bower/codemirror/addon/edit/matchtags.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/bower/codemirror/addon/fold/xml-fold.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/bower/codemirror/addon/display/fullscreen.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/bower/codemirror/addon/display/panel.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/bower/codemirror/addon/display/rulers.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/bower/codemirror/addon/dialog/dialog.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/bower/codemirror/addon/search/searchcursor.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/bower/codemirror/addon/search/search.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/bower/codemirror/addon/search/matchesonscrollbar.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/bower/codemirror/addon/scroll/annotatescrollbar.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/bower/codemirror/addon/hint/show-hint.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/bower/codemirror/addon/hint/anyword-hint.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/bower/codemirror/keymap/vim.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/bower/codemirror-emmet/dist/emmet.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/scripts/html.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/scripts/goto-line.js?version=$RELEASE"></script>
 SCRIPT
   } else {
     $cm = <<SCRIPT;
@@ -74,6 +83,7 @@ SCRIPT
   }
 
   my $script = <<SCRIPT;
+<script type="text/javascript" src="$plugin/scripts/modac.prettyprint$suffix.js?version=$RELEASE"></script>
 <script type="text/javascript" src="$plugin/scripts/modac.codemirror$suffix.js?version=$RELEASE"></script>
 SCRIPT
 
@@ -91,18 +101,24 @@ Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 
 Author: Sven Meyer <meyer@modell-aachen.de>
 
-Copyright (C) 2008-2015 Foswiki Contributors. Foswiki Contributors
-are listed in the AUTHORS file in the root of this distribution.
-NOTE: Please extend that file, not this notice.
+The MIT License (MIT)
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version. For
-more details read LICENSE in the root of this distribution.
+Copyright (c) 2015 Modell Aachen GmbH
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-As per the GPL, removal of this notice is prohibited.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

@@ -7,6 +7,7 @@ module.exports = function(grunt) {
   pkg.dataDir = 'data/System';
   pkg.libDirBase = 'lib/Foswiki/' + (isPlugin ? 'Plugins/': 'Contrib/');
   pkg.libDir = pkg.libDirBase + pkg.name;
+  pkg.node = 'node_modules';
 
   try {
     var bowerrc = grunt.file.readJSON('.bowerrc');
@@ -62,6 +63,10 @@ module.exports = function(grunt) {
           '<%= pkg.pubDir %>/scripts/modac.codemirror.min.js': [
             '<%= pkg.pubDir %>/scripts/modac.codemirror.js'
           ],
+          '<%= pkg.pubDir %>/scripts/modac.prettyprint.min.js': [
+            '<%= pkg.pubDir %>/scripts/html.js',
+            '<%= pkg.pubDir %>/scripts/modac.prettyprint.js'
+          ],
           '<%= pkg.pubDir %>/scripts/codemirror.min.js': [
             '<%= pkg.bower %>/codemirror/lib/codemirror.js',
             '<%= pkg.bower %>/codemirror/mode/xml/xml.js',
@@ -78,11 +83,19 @@ module.exports = function(grunt) {
             '<%= pkg.bower %>/codemirror/addon/edit/closetag.js',
             '<%= pkg.bower %>/codemirror/addon/edit/matchtags.js',
             '<%= pkg.bower %>/codemirror/addon/fold/xml-fold.js',
+            '<%= pkg.bower %>/codemirror/addon/dialog/dialog.js',
+            '<%= pkg.bower %>/codemirror/addon/display/fullscreen.js',
+            '<%= pkg.bower %>/codemirror/addon/display/panel.js',
             '<%= pkg.bower %>/codemirror/addon/display/rulers.js',
             '<%= pkg.bower %>/codemirror/addon/hint/show-hint.js',
             '<%= pkg.bower %>/codemirror/addon/hint/anymword-hint.js',
+            '<%= pkg.bower %>/codemirror/addon/search/searchcursor.js',
+            '<%= pkg.bower %>/codemirror/addon/search/search.js',
+            '<%= pkg.bower %>/codemirror/addon/search/matchesonscrollbar.js',
+            '<%= pkg.bower %>/codemirror/addon/scroll/annotatescrollbar.js',
             '<%= pkg.bower %>/codemirror/keymap/vim.js',
-            '<%= pkg.bower %>/codemirror-emmet/dist/emmet.js'
+            '<%= pkg.bower %>/codemirror-emmet/dist/emmet.js',
+            '<%= pkg.pubDir %>/scripts/goto-line.js',
           ],
         }]
       }
