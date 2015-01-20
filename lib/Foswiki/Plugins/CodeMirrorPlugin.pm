@@ -21,18 +21,22 @@ sub initPlugin {
       return 0;
   }
 
-  my $ctx = Foswiki::Func::getContext(); 
-  return 1 unless $ctx->{edit};
-  return 1 unless $ctx->{'NOWYSIWYG'};
-  return 1 if $ctx->{'WYSIWYG_TEXT'};
-
+  my $ctx = Foswiki::Func::getContext();
   my $query = Foswiki::Func::getRequestObject();
   my $param = $query->{param};
+
   my $nocm = $param->{nocm} if $param;
   my $pref = Foswiki::Func::getPreferencesValue( "NOCM" );
   if ( $pref || ($nocm && @$nocm[0] eq 1) ) {
     $ctx->{'NOCM'} = 1;
     return 1;
+  }
+
+  my $raw = $param->{raw} if $param;
+  unless ( $raw ) {
+    return 1 unless $ctx->{edit};
+    return 1 unless $ctx->{'NOWYSIWYG'};
+    return 1 if $ctx->{'WYSIWYG_TEXT'};
   }
 
   my $debug = $Foswiki::cfg{Plugins}{CodeMirrorPlugin}{Debug} || 0;
@@ -90,6 +94,20 @@ SCRIPT
   Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::SCRIPTS', $cm );
   Foswiki::Func::addToZone( 'head', 'CODEMIRRORPLUGIN::STYLES', $style );
   Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::CODEMIRROR', $script, 'CODEMIRRORPLUGIN::SCRIPTS' );
+
+  if ( $raw ) {
+    Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::CODEMIRROR::READONLY', <<SCRIPT, 'CODEMIRRORPLUGIN::CODEMIRROR' );
+<script>
+(function(\$) {
+  \$(document).ready( function() {
+    if ( CodeMirror && CodeMirror.currentInstance ) {
+      CodeMirror.currentInstance.setOption('readOnly', true);
+    }
+  });
+})(jQuery);
+</script>
+SCRIPT
+  }
 
   return 1;
 }
