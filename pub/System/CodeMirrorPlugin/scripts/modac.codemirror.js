@@ -220,6 +220,11 @@
     var cm = CodeMirror.currentInstance;
     cm.addOverlay( whitespaceOverlay );
 
+    var parent = document.getElementById('cke-toolbar-container');
+    if ( !parent ) {
+      return;
+    }
+
     var panel = document.createElement("div");
     panel.className = "CodeMirror-toolbar top";
 
@@ -259,6 +264,7 @@
       CodeMirror.on( button, 'click', clickHandler );
     }
 
-    cm.addPanel( panel, {position: 'top'} );
+    // cm.addPanel( panel, {position: 'top'} );
+    parent.appendChild( panel );
   });
 })(jQuery);
