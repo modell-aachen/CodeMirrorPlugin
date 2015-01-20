@@ -1,0 +1,8 @@
+msgid "CTRL"
+msgstr "STRG"
+
+msgid "SHIFT"
+msgstr "UMSCHALT"
+
+msgid "Space"
+msgstr "Leertaste"
