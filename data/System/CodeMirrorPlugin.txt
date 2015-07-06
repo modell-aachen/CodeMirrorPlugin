@@ -1,0 +1,76 @@
+%META:TOPICPARENT{name="Plugins"}%
+<literal>
+  <style>
+    kbd {
+      -moz-border-radius:3px;
+      -moz-box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+      -webkit-border-radius:3px;
+      -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+      background-color:#f7f7f7;
+      border:1px solid #ccc;
+      border-radius:3px;
+      box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+      color:#333;
+      display:inline-block;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:11px;
+      line-height:1.4;
+      margin:0 .1em;
+      padding:.1em .6em;
+      text-shadow:0 1px 0 #fff;
+    }
+  </style>
+</literal>
+
+---+ CodeMirrorPlugin
+
+%SHORTDESCRIPTION%
+
+<!--
+One line description, required for extensions repository catalog.
+   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+-->
+
+---++ Requirements
+
+IE9+, Firefox, Chrome, Safari
+
+---++ Plugin Preferences
+
+CodeMirrorPlugin will load automatically unless disabled by preference value
+<verbatim>
+   * Set NOCM = 1
+</verbatim>
+or query parameter
+<verbatim>
+nocm=1
+</verbatim>
+
+
+---++ Editor Shortcuts
+| *Shortcut* | *Function* |
+| <kbd>CTRL</kbd> <strong>+</strong> <kbd>F</kbd> | Search |
+| <kbd>%MAKETEXT{"SHIFT"}%</kbd> <strong>+</strong> <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>F</kbd> | Clear search |
+| <kbd>F3</kbd> | Find next |
+| <kbd>%MAKETEXT{"SHIFT"}%</kbd> <strong>+</strong> <kbd>F3</kbd>| Find previous |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>G</kbd> | Go to line |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>H</kbd> | Replace |
+| <kbd>%MAKETEXT{"SHIFT"}%</kbd> <strong>+</strong> <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>H</kbd> | Replace all |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>%MAKETEXT{"Space"}%</kbd>| Autocomplete |
+| <kbd>%MAKETEXT{"CTRL"}%</kbd> <strong>+</strong> <kbd>P</kbd> | Prettify selection |
+| <kbd>F11</kbd> | Toggle fullscreen |
+| <kbd>ESC</kbd> | Exit fullscreen |
+
+---++ Installation
+%$INSTALL_INSTRUCTIONS%
+
+---++ Info
+
+|  Author: | SvenMeyer |
+|  Copyright: | 2015, Modell Aachen GmbH, All Rights Reserved |
+|  License: | MIT ([[http://opensource.org/licenses/MIT][MIT License]]) |
+|  Dependencies: | %$DEPENDENCIES% |
+|  Version: | %$VERSION% |
+|  Release: | %$RELEASE% |
+|  Change&nbsp;History: | <!-- versions below in reverse order --> |
+
