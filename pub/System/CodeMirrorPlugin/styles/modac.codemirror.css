@@ -1,14 +1,16 @@
+@charset "UTF-8";
 @font-face {
   font-family: 'SourceCodePro';
-  src: url('../fonts/sourcecodepro-regular-webfont.eot');
-  src: url('../fonts/sourcecodepro-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/sourcecodepro-regular-webfont.woff2') format('woff2'), url('../fonts/sourcecodepro-regular-webfont.woff') format('woff'), url('../fonts/sourcecodepro-regular-webfont.ttf') format('truetype'), url('../fonts/sourcecodepro-regular-webfont.svg#source_code_proregular') format('svg');
+  src: url("../fonts/sourcecodepro-regular-webfont.eot");
+  src: url("../fonts/sourcecodepro-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/sourcecodepro-regular-webfont.woff2") format("woff2"), url("../fonts/sourcecodepro-regular-webfont.woff") format("woff"), url("../fonts/sourcecodepro-regular-webfont.ttf") format("truetype"), url("../fonts/sourcecodepro-regular-webfont.svg#source_code_proregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 /* BASICS */
 .CodeMirror {
   font-family: 'SourceCodePro';
-  height: 300px;
+  height: auto !important;
+  min-height: 300px;
   line-height: 1.5;
   font-size: 11px;
   position: relative;
@@ -31,7 +33,7 @@
   border-bottom: 1px solid orange;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  opacity: 0.5; }
+  opacity: .5; }
 
 .CodeMirror-dialog {
   position: absolute;
@@ -39,7 +41,7 @@
   right: 0;
   background: white;
   z-index: 15;
-  padding: 0.1em 0.8em;
+  padding: .1em .8em;
   overflow: hidden;
   color: #333; }
 
@@ -121,30 +123,24 @@
 @-moz-keyframes blink {
   0% {
     background: #7e7; }
-
   50% {
     background: none; }
-
   100% {
     background: #7e7; } }
 
 @-webkit-keyframes blink {
   0% {
     background: #7e7; }
-
   50% {
     background: none; }
-
   100% {
     background: #7e7; } }
 
 @keyframes blink {
   0% {
     background: #7e7; }
-
   50% {
     background: none; }
-
   100% {
     background: #7e7; } }
 
@@ -414,13 +410,12 @@ div.CodeMirror-cursors {
 
 /* Used to force a border model for a node */
 .cm-force-border {
-  padding-right: 0.1px; }
+  padding-right: .1px; }
 
 @media print {
   /* Hide the cursor when printing */
   .CodeMirror div.CodeMirror-cursors {
-    visibility: hidden; }
- }
+    visibility: hidden; } }
 
 /* See issue #2901 */
 .cm-tab-wrap-hack:after {
@@ -654,7 +649,7 @@ li.CodeMirror-hint-active {
   .cm-btn.btn-base:first-child {
     margin-left: 30px; }
   .cm-btn.btn-base:hover {
-    background-color: #dedede; }
+    background-color: #dedddd; }
   .cm-btn.btn-base:active {
     background-color: #c4c4c4; }
   .cm-btn.btn-base.btn-undo {
