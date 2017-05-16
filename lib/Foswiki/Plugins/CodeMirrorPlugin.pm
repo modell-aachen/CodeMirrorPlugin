@@ -91,13 +91,12 @@ SCRIPT
 <script type="text/javascript" src="$plugin/scripts/modac.codemirror$suffix.js?version=$RELEASE"></script>
 SCRIPT
 
-  Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::SCRIPTS', $cm );
+  Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::SCRIPTS', $cm, 'JQUERYPLUGIN' );
   Foswiki::Func::addToZone( 'head', 'CODEMIRRORPLUGIN::STYLES', $style );
   Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::CODEMIRROR', $script, 'CODEMIRRORPLUGIN::SCRIPTS' );
 
   if ( $raw ) {
-    Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::CODEMIRROR::READONLY', <<SCRIPT, 'CODEMIRRORPLUGIN::CODEMIRROR' );
-<script>
+    my $inline = <<INLINE;
 (function(\$) {
   \$(document).ready( function() {
     if ( CodeMirror && CodeMirror.currentInstance ) {
@@ -105,7 +104,18 @@ SCRIPT
     }
   });
 })(jQuery);
+INLINE
+
+    if ( Foswiki::Func::getContext()->{SafeWikiSignable} ) {
+      Foswiki::Plugins::SafeWikiPlugin::Signatures::permitInlineCode($inline);
+    }
+
+    Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::CODEMIRROR::READONLY', <<SCRIPT, 'CODEMIRRORPLUGIN::CODEMIRROR' );
+<literal>
+<script>
+$inline
 </script>
+</literal>
 SCRIPT
   }
 
