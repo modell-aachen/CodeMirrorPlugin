@@ -39,56 +39,18 @@ sub initPlugin {
     return 1 if $ctx->{'WYSIWYG_TEXT'};
   }
 
-  my $debug = $Foswiki::cfg{Plugins}{CodeMirrorPlugin}{Debug} || 0;
-  my $suffix = $debug ? '' : '.min';
-
   my $plugin = '%PUBURLPATH%/%SYSTEMWEB%/CodeMirrorPlugin';
   my $style = <<STYLE;
-<link rel="stylesheet" type="text/css" media="all" href="$plugin/styles/modac.codemirror$suffix.css?version=$RELEASE" />
+<link rel="stylesheet" type="text/css" media="all" href="$plugin/styles/modac.codemirror.min.css?version=$RELEASE" />
 STYLE
 
-  my $cm = '';
-  if ( $debug ) {
-    $cm = <<SCRIPT;
-<script type="text/javascript" src="$plugin/bower/codemirror/lib/codemirror.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/mode/xml/xml.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/mode/javascript/javascript.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/mode/css/css.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/mode/htmlmixed/htmlmixed.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/mode/javascript/javascript.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/selection/active-line.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/selection/mark-selection.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/mode/simple.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/mode/overlay.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/edit/closebrackets.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/edit/matchbrackets.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/edit/closetag.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/edit/matchtags.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/fold/xml-fold.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/display/fullscreen.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/display/panel.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/display/rulers.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/dialog/dialog.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/search/searchcursor.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/search/search.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/search/matchesonscrollbar.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/scroll/annotatescrollbar.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/hint/show-hint.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/addon/hint/anyword-hint.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror/keymap/vim.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/bower/codemirror-emmet/dist/emmet.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/scripts/html.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/scripts/goto-line.js?version=$RELEASE"></script>
-SCRIPT
-  } else {
-    $cm = <<SCRIPT;
+  my $cm = <<SCRIPT;
 <script type="text/javascript" src="$plugin/scripts/codemirror.min.js?version=$RELEASE"></script>
 SCRIPT
-  }
 
   my $script = <<SCRIPT;
-<script type="text/javascript" src="$plugin/scripts/modac.prettyprint$suffix.js?version=$RELEASE"></script>
-<script type="text/javascript" src="$plugin/scripts/modac.codemirror$suffix.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/scripts/modac.prettyprint.min.js?version=$RELEASE"></script>
+<script type="text/javascript" src="$plugin/scripts/modac.codemirror.min.js?version=$RELEASE"></script>
 SCRIPT
 
   Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::SCRIPTS', $cm, 'JQUERYPLUGIN' );
