@@ -91,7 +91,7 @@ SCRIPT
 <script type="text/javascript" src="$plugin/scripts/modac.codemirror$suffix.js?version=$RELEASE"></script>
 SCRIPT
 
-  Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::SCRIPTS', $cm );
+  Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::SCRIPTS', $cm, 'JQUERYPLUGIN' );
   Foswiki::Func::addToZone( 'head', 'CODEMIRRORPLUGIN::STYLES', $style );
   Foswiki::Func::addToZone( 'script', 'CODEMIRRORPLUGIN::CODEMIRROR', $script, 'CODEMIRRORPLUGIN::SCRIPTS' );
 
